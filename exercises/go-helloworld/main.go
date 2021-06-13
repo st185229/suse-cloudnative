@@ -6,10 +6,16 @@ import (
 )
 
 func helloWorld(w http.ResponseWriter, r *http.Request){
-    fmt.Fprintf(w, "Hello World")
+    _, err := fmt.Fprintf(w, "Hello World")
+    if err != nil {
+        return 
+    }
 }
 
 func main() {
     http.HandleFunc("/", helloWorld)
-    http.ListenAndServe(":6111", nil)
+    err := http.ListenAndServe(":6111", nil)
+    if err != nil {
+        return 
+    }
 }
